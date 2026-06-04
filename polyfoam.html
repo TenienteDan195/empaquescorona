@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polifoam | Empaques Corona - Soluciones a Medida</title>
-    <meta name="description" content="Especialistas en transformación de espuma de polietileno (polifoam). Calibres desde 1/32 pulg hasta 1/4 pulg. Soluciones para industria automotriz y agrícola.">
+    <title>Polifoam | Empaques Corona - Especialistas en Protección</title>
+    <meta name="description" content="Descubre todo sobre el Polifoam. Propiedades, calibres y soluciones de transformación a medida para proteger tus productos industriales y agrícolas.">
     
     <!-- Tipografía Geologica -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,399 +38,172 @@
             padding-top: var(--nav-height);
         }
 
-        /* --- Menú de Navegación --- */
+        /* --- Menú de Navegación (Misma estructura) --- */
         .navbar {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--nav-height);
+            top: 0; left: 0; width: 100%; height: var(--nav-height);
             background-color: var(--blanco);
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 50px;
-            z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 50px; z-index: 1000;
             transition: all 0.4s ease; 
         }
-        
         .navbar.scrolled {
             background-color: var(--primario);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
+        .logo-container { height: 100%; display: flex; align-items: center; }
+        .logo-wrapper { position: relative; display: flex; align-items: center; height: 60px; }
+        .logo-img { max-height: 60px; width: auto; object-fit: contain; transition: opacity 0.4s ease; }
+        .logo-blanco { position: absolute; top: 0; left: 0; opacity: 0; }
+        .navbar.scrolled .logo-original { opacity: 0; }
+        .navbar.scrolled .logo-blanco { opacity: 1; }
+        .nav-links { list-style: none; display: flex; gap: 30px; align-items: center; height: 100%; }
+        .nav-links li { position: relative; height: 100%; display: flex; align-items: center; }
+        .nav-links li a { text-decoration: none; color: var(--gris-oscuro); font-weight: 600; font-size: 1rem; transition: color 0.3s ease; padding: 10px 0; }
+        .nav-links li a:hover { color: var(--primario); }
+        .navbar.scrolled .nav-links li a { color: var(--blanco); }
+        .navbar.scrolled .nav-links li a:hover { color: var(--gris-claro); }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            height: 100%;
-        }
-        .logo-img {
-            max-height: 50px; 
-            width: auto;
-            object-fit: contain;
-            transition: filter 0.4s ease;
-        }
-
-        .navbar.scrolled .logo-img {
-            filter: brightness(0) invert(1); 
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 30px;
-            align-items: center;
-            height: 100%;
-        }
-        .nav-links li {
-            position: relative;
-            height: 100%;
-            display: flex;
-            align-items: center;
-        }
-        .nav-links li a {
-            text-decoration: none;
-            color: var(--gris-oscuro);
-            font-weight: 600;
-            font-size: 1rem;
-            transition: color 0.3s ease;
-            padding: 10px 0;
-        }
-        
-        .nav-links li a:hover {
-            color: var(--primario);
-        }
-
-        .navbar.scrolled .nav-links li a {
-            color: var(--blanco);
-        }
-        .navbar.scrolled .nav-links li a:hover {
-            color: var(--gris-claro);
-        }
-
-        /* Menú Desplegable (Dropdown) */
-        .dropdown:hover .dropdown-content {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
+        /* Dropdown */
+        .dropdown:hover .dropdown-content { display: block; opacity: 1; transform: translateY(0); pointer-events: auto; }
         .dropdown-content {
-            display: block;
-            opacity: 0;
-            transform: translateY(10px);
-            pointer-events: none;
-            position: absolute;
-            top: 60px; 
-            left: 0;
-            background-color: var(--blanco);
-            min-width: 180px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            z-index: 1001;
+            display: block; opacity: 0; transform: translateY(10px); pointer-events: none;
+            position: absolute; top: 60px; left: 0; background-color: var(--blanco);
+            min-width: 180px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); border-radius: 8px;
+            overflow: hidden; transition: all 0.3s ease; z-index: 1001;
         }
-        .dropdown-content li {
-            height: auto;
-            display: block;
-        }
-        .dropdown-content li a {
-            color: var(--gris-oscuro) !important; 
-            padding: 12px 20px;
-            display: block;
-            border-bottom: 1px solid rgba(198,198,198,0.2);
-        }
-        .dropdown-content li:last-child a {
-            border-bottom: none;
-        }
-        .dropdown-content li a:hover {
-            background-color: var(--fondo);
-            color: var(--primario) !important;
-            padding-left: 25px; 
-        }
+        .dropdown-content li { display: block; }
+        .dropdown-content li a { color: var(--gris-oscuro) !important; padding: 12px 20px; display: block; border-bottom: 1px solid rgba(198,198,198,0.2); }
+        .dropdown-content li:last-child a { border-bottom: none; }
+        .dropdown-content li a:hover { background-color: var(--fondo); color: var(--primario) !important; padding-left: 25px; }
 
-        /* Utilidades de Animación */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--primario) 0%, #1a242f 100%);
-            color: var(--blanco);
-            padding: 100px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(198,198,198,0.1) 10%, transparent 10%);
-            background-size: 20px 20px;
-            z-index: 0;
-        }
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .hero h1 {
-            font-size: 3.2rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            font-weight: 300;
-            color: var(--gris-claro);
-            margin-bottom: 40px;
-        }
+        /* Utilidades */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
         .btn-cta {
-            display: inline-block;
-            background-color: var(--blanco);
-            color: var(--primario);
-            padding: 15px 35px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            display: inline-block; background-color: var(--primario); color: var(--blanco);
+            padding: 15px 35px; border-radius: 50px; font-weight: 600; text-decoration: none;
+            transition: transform 0.3s, background-color 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        .btn-cta:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+        .btn-cta:hover { transform: translateY(-3px); background-color: var(--gris-oscuro); color: var(--blanco); }
+        .btn-outline {
+            background-color: transparent; border: 2px solid var(--primario); color: var(--primario);
+        }
+        .btn-outline:hover { background-color: var(--primario); color: var(--blanco); }
+
+        /* --- Hero Dinámico (Split Layout) --- */
+        .hero-split {
+            display: flex;
+            align-items: center;
+            background-color: var(--fondo);
+            min-height: 80vh;
+            overflow: hidden;
+        }
+        .hero-text {
+            flex: 1; padding: 80px 10%;
+        }
+        .hero-text h1 {
+            font-size: 3.5rem; font-weight: 800; color: var(--primario); margin-bottom: 20px; line-height: 1.1;
+        }
+        .hero-text p {
+            font-size: 1.2rem; font-weight: 300; color: var(--gris-oscuro); margin-bottom: 40px;
+        }
+        .hero-image {
+            flex: 1;
+            height: 80vh;
+            background-image: url('https://images.unsplash.com/photo-1586528116311-ad8ed7c1590a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
+            background-size: cover; background-position: center;
+            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
         }
 
-        /* Industrias (Tarjetas con Imágenes y Botones) */
-        .industrias {
-            padding: 80px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+        /* --- Características Clave (Grid de Iconos) --- */
+        .features-section {
+            padding: 100px 20px; background-color: var(--blanco); text-align: center;
         }
         .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--primario);
-            margin-bottom: 50px;
-            font-weight: 800;
+            font-size: 2.5rem; color: var(--primario); margin-bottom: 60px; font-weight: 800;
         }
-        .grid-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px; max-width: 1200px; margin: 0 auto;
         }
-        .card {
-            background: var(--blanco);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(71, 71, 71, 0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            flex-direction: column; 
-        }
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(71, 71, 71, 0.15);
-        }
-        .card-img-container {
-            width: 100%;
-            height: 200px;
-            background-color: var(--gris-claro);
-            overflow: hidden;
-        }
-        .card-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        .card:hover .card-img {
-            transform: scale(1.05); 
-        }
-        .card-content {
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1; 
-        }
-        .card h3 {
-            color: var(--primario);
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-        .card-content p {
-            font-weight: 300;
-            color: var(--gris-oscuro);
-            margin-bottom: 15px;
-        }
-        .card-content ul {
-            list-style: none; 
-            margin-bottom: 25px;
-        }
-        .card-content ul li {
-            font-weight: 400;
-            color: var(--gris-oscuro);
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-            line-height: 1.4;
-        }
-        
-        .btn-card {
-            margin-top: auto; 
-            display: inline-block;
-            background-color: var(--primario);
-            color: var(--blanco);
-            padding: 12px 20px;
-            border-radius: 50px;
-            text-align: center;
-            font-weight: 600;
-            text-decoration: none;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        .btn-card:hover {
-            background-color: var(--gris-oscuro);
-            transform: translateY(-2px);
-        }
-
-        /* Tabla Técnica */
-        .specs {
-            background-color: var(--blanco);
-            padding: 80px 20px;
-        }
-        .table-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            overflow-x: auto;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        th, td {
+        .feature-box {
             padding: 20px;
-            text-align: left;
-            border-bottom: 1px solid var(--gris-claro);
         }
-        th {
-            background-color: var(--primario);
-            color: var(--blanco);
-            font-weight: 600;
+        .feature-icon {
+            width: 80px; height: 80px; background-color: var(--fondo); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px auto; font-size: 2rem; color: var(--primario);
+            box-shadow: 0 5px 15px rgba(62, 81, 102, 0.1); transition: transform 0.3s;
         }
-        tr:hover {
-            background-color: var(--fondo);
-        }
+        .feature-box:hover .feature-icon { transform: scale(1.1); }
+        .feature-box h4 { color: var(--primario); margin-bottom: 15px; font-size: 1.2rem; }
+        .feature-box p { font-size: 0.95rem; font-weight: 300; }
 
-        /* Texto Descriptivo SEO */
-        .seo-text {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px 60px 20px;
-            text-align: center;
+        /* --- Banner CTA Intermedio --- */
+        .mid-cta {
+            background: linear-gradient(135deg, var(--primario) 0%, #1a242f 100%);
+            padding: 60px 20px; text-align: center; color: var(--blanco);
         }
-        .seo-text h2 {
-            color: var(--primario);
-            margin-bottom: 20px;
-        }
-        .seo-text p {
-            color: var(--gris-oscuro);
-            font-weight: 300;
-            font-size: 1.1rem;
-        }
+        .mid-cta h2 { font-size: 2.2rem; margin-bottom: 15px; }
+        .mid-cta p { font-weight: 300; color: var(--gris-claro); margin-bottom: 30px; font-size: 1.1rem; }
+        .mid-cta .btn-cta { background-color: var(--blanco); color: var(--primario); }
 
-        /* Footer a 3 Columnas */
-        .main-footer {
-            background-color: var(--gris-oscuro);
-            color: var(--blanco);
-            padding: 60px 50px;
-            margin-top: 50px;
+        /* --- Filas Alternas (Zig-Zag) --- */
+        .zigzag-section { padding: 100px 20px; background-color: var(--fondo); }
+        .row-item {
+            display: flex; align-items: center; gap: 50px; max-width: 1200px;
+            margin: 0 auto 80px auto;
         }
-        .footer-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-        }
-        .footer-col h3 {
-            font-size: 1.2rem;
-            color: var(--gris-claro);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .footer-logo {
-            max-height: 60px;
-            margin-bottom: 20px;
-        }
-        .footer-col p {
-            margin-bottom: 10px;
-            font-weight: 300;
-            color: #e0e0e0;
-        }
-        .footer-links {
-            list-style: none;
-        }
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-        .footer-links a {
-            color: #e0e0e0;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 300;
-        }
-        .footer-links a:hover {
-            color: var(--blanco);
-            padding-left: 5px; 
-        }
-        .footer-bottom {
-            text-align: center;
-            padding-top: 40px;
-            margin-top: 40px;
-            border-top: 1px solid rgba(198, 198, 198, 0.2);
-            font-size: 0.9rem;
-            color: var(--gris-claro);
-        }
+        .row-item:last-child { margin-bottom: 0; }
+        .row-item.reverse { flex-direction: row-reverse; }
+        .row-img { flex: 1; border-radius: 15px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .row-img img { width: 100%; height: auto; display: block; transition: transform 0.5s; }
+        .row-img:hover img { transform: scale(1.05); }
+        .row-text { flex: 1; padding: 20px; }
+        .row-text h3 { font-size: 2rem; color: var(--primario); margin-bottom: 20px; }
+        .row-text p { font-weight: 300; margin-bottom: 20px; font-size: 1.1rem; }
+        .row-text ul { list-style: none; margin-bottom: 30px; }
+        .row-text ul li { position: relative; padding-left: 25px; margin-bottom: 10px; font-weight: 400; }
+        .row-text ul li::before { content: '✔'; position: absolute; left: 0; color: var(--primario); font-weight: bold; }
 
-        /* Responsive */
+        /* Footer (Igual al principal) */
+        .main-footer { background-color: var(--gris-oscuro); color: var(--blanco); padding: 60px 50px; margin-top: 0; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
+        .footer-col h3 { font-size: 1.2rem; color: var(--gris-claro); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-logo { max-height: 60px; margin-bottom: 20px; }
+        .footer-col p { margin-bottom: 10px; font-weight: 300; color: #e0e0e0; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: #e0e0e0; text-decoration: none; transition: color 0.3s; font-weight: 300; }
+        .footer-links a:hover { color: var(--blanco); padding-left: 5px; }
+        .footer-bottom { text-align: center; padding-top: 40px; margin-top: 40px; border-top: 1px solid rgba(198, 198, 198, 0.2); font-size: 0.9rem; color: var(--gris-claro); }
+
         @media (max-width: 768px) {
-            .navbar { padding: 0 20px; }
-            .nav-links { display: none; }
-            .hero h1 { font-size: 2.2rem; }
-            .footer-grid { text-align: center; }
+            .navbar { padding: 0 20px; } .nav-links { display: none; }
+            .hero-split { flex-direction: column; min-height: auto; }
+            .hero-image { width: 100%; height: 300px; clip-path: none; }
+            .row-item, .row-item.reverse { flex-direction: column; text-align: center; }
+            .row-text ul li { text-align: left; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Menú de Navegación (Rutas actualizadas para retornar al Home) -->
+    <!-- Menú de Navegación -->
     <header class="navbar" id="navbar">
         <div class="logo-container">
-            <a href="index.html">
-                <img src="https://via.placeholder.com/200x60/ffffff/3E5166?text=LOGO+AQU%C3%8D" alt="Logotipo Empaques Corona" class="logo-img">
+            <a href="index.html" class="logo-wrapper">
+                <img src="Logo.png" alt="Logotipo Empaques Corona" class="logo-img logo-original">
+                <img src="logo-negativo-blanco.png" alt="Logotipo Empaques Corona Blanco" class="logo-img logo-blanco">
             </a>
         </div>
         <nav>
             <ul class="nav-links">
                 <li><a href="index.html#home">Home</a></li>
-                <li><a href="index.html#nosotros">Nosotros</a></li>
-                <li><a href="#polifoam-top">Polifoam</a></li>
-                <li><a href="index.html#catalogo">Poliburbuja</a></li>
+                <li><a href="polyfoam.html">Polifoam</a></li>
+                <li><a href="poliburbuja.html">Poliburbuja</a></li>
                 <li class="dropdown">
                     <a href="index.html#suministros">Suministros ▾</a>
                     <ul class="dropdown-content">
@@ -439,137 +212,101 @@
                         <li><a href="index.html#cacahuate">Cacahuate Bio</a></li>
                     </ul>
                 </li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Hero Section Especializado en Polifoam -->
-    <section id="polifoam-top" class="hero reveal">
-        <div class="hero-content">
-            <h1>Polifoam: Amortiguación Extrema</h1>
-            <p>Transformamos espuma de polietileno en la barrera protectora perfecta para tus productos. Material no abrasivo, resistente a la humedad y con máxima absorción de impactos mecánicos.</p>
-            <a href="#contacto" class="btn-cta">SOLICITAR MUESTRAS Y COTIZACIÓN</a>
+    <!-- Hero Section Split -->
+    <section class="hero-split reveal">
+        <div class="hero-text">
+            <h1>Polifoam: Ingeniería en Amortiguación</h1>
+            <p>La espuma de polietileno es el estándar industrial para proteger productos críticos. Cortamos, sellamos y transformamos este material en la barrera perfecta para tu línea de producción.</p>
+            <a href="contacto.html" class="btn-cta">Cotizar Especificaciones</a>
         </div>
+        <div class="hero-image"></div>
     </section>
 
-    <!-- Introducción SEO -->
-    <section class="reveal" style="padding-top: 80px;">
-        <div class="seo-text">
-            <h2>Expertos en Transformación a Medida</h2>
-            <p>El Polifoam (espuma de polietileno) es un material de celdas cerradas altamente versátil. En Empaques Corona, cortamos y manufacturamos este material para adaptarnos exactamente a los requerimientos de la industria automotriz, electrónica, médica y agrícola, garantizando que cada pieza llegue intacta a su destino.</p>
-        </div>
-    </section>
-
-    <!-- Catálogo de Formatos de Polifoam -->
-    <section id="formatos" class="industrias" style="padding-top: 0;">
-        <h2 class="section-title reveal">Nuestros Formatos de Transformación</h2>
-        <div class="grid-cards">
-            
-            <!-- Formato 1 -->
-            <div class="card reveal">
-                <div class="card-img-container">
-                    <!-- SUGERENCIA: Imagen de una bolsa de polifoam protegiendo una pieza metálica o electrónica -->
-                    <img src="https://images.unsplash.com/photo-1518982540400-16c8bc59e71e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Bolsas y Fundas de Polifoam" class="card-img">
-                </div>
-                <div class="card-content">
-                    <h3>Bolsas y Fundas</h3>
-                    <p>Cortes termosellados para crear fundas protectoras a la medida exacta de sus componentes.</p>
-                    <ul>
-                        <li>✔ Prevención total contra rayaduras superficiales.</li>
-                        <li>✔ Agilidad en la línea de empaque.</li>
-                        <li>✔ Ideal para inyección de plásticos y autopartes.</li>
-                    </ul>
-                    <a href="#contacto" class="btn-card">Cotizar millar</a>
-                </div>
+    <!-- Características (Valor Extra) -->
+    <section class="features-section reveal">
+        <h2 class="section-title">¿Por qué el Polifoam es irremplazable?</h2>
+        <div class="features-grid">
+            <div class="feature-box reveal">
+                <div class="feature-icon">🛡️</div>
+                <h4>Celdas Cerradas</h4>
+                <p>Estructura molecular que impide el paso del agua, haciéndolo 100% impermeable y resistente a la humedad.</p>
             </div>
-
-            <!-- Formato 2 -->
-            <div class="card reveal">
-                <div class="card-img-container">
-                    <!-- SUGERENCIA: Imagen de cajas de jitomates/frutas con separadores blancos -->
-                    <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hojas Cortadas de Polifoam para Agricultura" class="card-img">
-                </div>
-                <div class="card-content">
-                    <h3>Hojas Cortadas (Separadores)</h3>
-                    <p>Tecnología de corte milimétrico para generar separadores apilables.</p>
-                    <ul>
-                        <li>✔ Evita la fricción entre productos.</li>
-                        <li>✔ Aprobado para contacto indirecto (Sector Agrícola).</li>
-                        <li>✔ Separación segura para cristalería fina.</li>
-                    </ul>
-                    <a href="#contacto" class="btn-card">Cotizar calibres</a>
-                </div>
+            <div class="feature-box reveal">
+                <div class="feature-icon">✨</div>
+                <h4>No Abrasivo</h4>
+                <p>Superficie increíblemente suave que jamás rayará la pintura, cristales o acabados brillantes de tus piezas.</p>
             </div>
-
-            <!-- Formato 3 -->
-            <div class="card reveal">
-                <div class="card-img-container">
-                    <!-- SUGERENCIA: Imagen de rollos grandes de polifoam industriales -->
-                    <img src="https://images.unsplash.com/photo-1586528116311-ad8ed7c1590a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Rollos de Polifoam Industrial" class="card-img">
-                </div>
-                <div class="card-content">
-                    <h3>Rollos de Alto Volumen</h3>
-                    <p>Suministro de material en formato continuo para operaciones de embalaje general o envoltura manual.</p>
-                    <ul>
-                        <li>✔ Disponibilidad inmediata en calibres estándar.</li>
-                        <li>✔ Excelente aislante térmico y acústico.</li>
-                        <li>✔ Rendimiento superior para envolturas largas.</li>
-                    </ul>
-                    <a href="#contacto" class="btn-card">Cotizar rollos</a>
-                </div>
+            <div class="feature-box reveal">
+                <div class="feature-icon">🔄</div>
+                <h4>Memoria Elástica</h4>
+                <p>Absorbe los impactos de caídas o vibraciones durante el traslado y recupera su forma original inmediatamente.</p>
             </div>
-
+            <div class="feature-box reveal">
+                <div class="feature-icon">🌱</div>
+                <h4>Ligero y Reciclable</h4>
+                <p>Añade protección extrema sin sumar peso extra a tus envíos, reduciendo costos logísticos y huella de carbono.</p>
+            </div>
         </div>
     </section>
 
-    <!-- Tabla Técnica Específica de Polifoam -->
-    <section id="calibres" class="specs reveal">
-        <h2 class="section-title">Especificaciones de Calibres (Espesores)</h2>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Calibre (Pulgadas)</th>
-                        <th>Grosor Aproximado</th>
-                        <th>Uso Recomendado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>1/32"</strong></td>
-                        <td>Aprox. 0.8 mm</td>
-                        <td>Protección superficial contra polvo y ligeras rayaduras. Separador agrícola.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>1/16"</strong></td>
-                        <td>Aprox. 1.6 mm</td>
-                        <td>Protección estándar. Bolsas para componentes electrónicos y plásticos.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>1/8"</strong></td>
-                        <td>Aprox. 3.2 mm</td>
-                        <td>Amortiguación media. Ideal para embalaje de muebles y electrodomésticos.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>1/4"</strong></td>
-                        <td>Aprox. 6.3 mm</td>
-                        <td>Máxima absorción de impacto. Autopartes pesadas y equipos industriales.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <!-- Mid CTA Banner -->
+    <section class="mid-cta reveal">
+        <h2>Transformamos a la medida de tu troquel</h2>
+        <p>Desde calibres ultra finos (1/32") hasta máxima absorción (1/4"). Cuéntanos qué necesitas proteger.</p>
+        <a href="contacto.html" class="btn-cta btn-outline" style="background-color: var(--blanco);">Hablar con un asesor</a>
     </section>
 
-    <!-- Footer a 3 Columnas (Igual al principal) -->
-    <footer id="contacto" class="main-footer">
+    <!-- Filas Alternas (Aplicaciones) -->
+    <section class="zigzag-section">
+        
+        <!-- Fila 1: Automotriz -->
+        <div class="row-item reveal">
+            <div class="row-img">
+                <img src="https://images.unsplash.com/photo-1518982540400-16c8bc59e71e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Protección de autopartes con Polifoam">
+            </div>
+            <div class="row-text">
+                <h3>Excelencia Automotriz y Electrónica</h3>
+                <p>Manufacturamos bolsas termoselladas por millar diseñadas para encajar perfectamente en los procesos de ensamble de alto volumen. Nuestro polifoam previene las micro-rayaduras durante el estibado de piezas delicadas.</p>
+                <ul>
+                    <li>Bolsas y fundas exactas para facias, espejos y faros.</li>
+                    <li>Aislamiento estático para componentes electrónicos.</li>
+                    <li>Surtido ágil para no detener tu línea de producción.</li>
+                </ul>
+                <a href="contacto.html" class="btn-cta">Solicitar cotización por millar</a>
+            </div>
+        </div>
+
+        <!-- Fila 2: Agrícola (Reverse) -->
+        <div class="row-item reverse reveal">
+            <div class="row-img">
+                <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Polifoam para exportación agrícola">
+            </div>
+            <div class="row-text">
+                <h3>Inocuidad en el Sector Agrícola</h3>
+                <p>El mercado de exportación de frutas y vegetales no permite mermas. Generamos cortes de precisión para crear hojas separadoras que amortiguan la mercancía en cada caja, evitando daños por fricción.</p>
+                <ul>
+                    <li>Aprobado para el contacto indirecto con alimentos.</li>
+                    <li>Formatos especiales para cajas de jitomate y aguacate.</li>
+                    <li>Resistencia a cámaras de refrigeración.</li>
+                </ul>
+                <a href="contacto.html" class="btn-cta">Cotizar calibres agrícolas</a>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Footer a 3 Columnas -->
+    <footer class="main-footer">
         <div class="footer-grid">
-            
             <div class="footer-col">
-                <img src="https://via.placeholder.com/200x60/474747/ffffff?text=LOGO+AQU%C3%8D" alt="Logotipo Empaques Corona" class="footer-logo">
+                <img src="logo-negativo-blanco.png" alt="Logotipo Empaques Corona" class="footer-logo">
                 <p>No somos creadores de materia prima, somos tu socio estratégico en la transformación y corte de polifoam. Generamos soluciones de empaque eficientes, con entregas ágiles de 3 a 5 días.</p>
             </div>
-
             <div class="footer-col">
                 <h3>Contacto</h3>
                 <p><strong>Ubicación:</strong> Parque Industrial, México</p>
@@ -577,29 +314,24 @@
                 <p><strong>Email:</strong> ventas@empaquescorona.com</p>
                 <p><strong>Horario:</strong> Lunes a Viernes 8:00 a 18:00 hrs</p>
             </div>
-
             <div class="footer-col">
                 <h3>Navegación</h3>
                 <ul class="footer-links">
-                    <li><a href="index.html#home">Home</a></li>
-                    <li><a href="index.html#nosotros">Nosotros</a></li>
-                    <li><a href="#polifoam-top">Polifoam</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="polifoam.html">Polifoam</a></li>
                     <li><a href="index.html#catalogo">Poliburbuja</a></li>
                     <li><a href="index.html#suministros">Suministros</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
                 </ul>
             </div>
-
         </div>
-        
         <div class="footer-bottom">
             <p>&copy; 2026 Empaques Corona. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <!-- JavaScript para animaciones e interacciones -->
+    <!-- JavaScript para animaciones -->
     <script>
-        // Funcionalidad de Cambio de Color del Navbar al hacer Scroll
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -609,7 +341,6 @@
             }
         });
 
-        // Funcionalidad de Scroll Reveal
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
