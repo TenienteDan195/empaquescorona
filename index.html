@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
-        /*    Variables Institucionales.   */
+        /* Variables Institucionales */
         :root {
             --gris-oscuro: #474747;
             --gris-claro: #c6c6c6;
@@ -65,13 +65,20 @@
             align-items: center;
             height: 100%;
         }
+        .logo-wrapper { 
+            position: relative; 
+            display: flex; 
+            align-items: center; 
+            height: 60px; 
+        }
         .logo-img {
-            max-height: 50px; 
+            max-height: 60px; 
             width: auto;
             object-fit: contain;
             transition: filter 0.4s ease;
         }
 
+        /* Cambio de color a blanco al hacer scroll */
         .navbar.scrolled .logo-img {
             filter: brightness(0) invert(1); 
         }
@@ -109,46 +116,36 @@
             color: var(--gris-claro);
         }
 
-        /* Menú Desplegable (Dropdown) */
-        .dropdown:hover .dropdown-content {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
+        /* --- Menú Desplegable (100% a prueba de fallos) --- */
+        .dropdown {
+            position: relative;
+        }
+        .dropdown::after {
+            content: ''; position: absolute; bottom: -20px; left: 0;
+            width: 100%; height: 30px; background: transparent; z-index: 1000;
         }
         .dropdown-content {
-            display: block;
-            opacity: 0;
-            transform: translateY(10px);
-            pointer-events: none;
-            position: absolute;
-            top: 60px; 
-            left: 0;
-            background-color: var(--blanco);
-            min-width: 180px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            z-index: 1001;
+            display: none; position: absolute; top: 65px; left: 0;
+            background-color: var(--blanco); min-width: 190px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15); border-radius: 8px;
+            overflow: hidden; z-index: 1001;
         }
-        .dropdown-content li {
-            height: auto;
-            display: block;
+        .dropdown:hover .dropdown-content {
+            display: block; animation: deslizarMenu 0.3s ease forwards;
         }
-        .dropdown-content li a {
-            color: var(--gris-oscuro) !important; 
-            padding: 12px 20px;
-            display: block;
-            border-bottom: 1px solid rgba(198,198,198,0.2);
+        .dropdown-content li { display: block; }
+        .dropdown-content li a { 
+            color: var(--gris-oscuro) !important; padding: 15px 20px; display: block; 
+            border-bottom: 1px solid rgba(198,198,198,0.2); transition: all 0.2s ease;
         }
-        .dropdown-content li:last-child a {
-            border-bottom: none;
+        .dropdown-content li:last-child a { border-bottom: none; }
+        .dropdown-content li a:hover { 
+            background-color: var(--fondo); color: var(--primario) !important; padding-left: 25px; 
         }
-        .dropdown-content li a:hover {
-            background-color: var(--fondo);
-            color: var(--primario) !important;
-            padding-left: 25px; 
+
+        @keyframes deslizarMenu {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Utilidades de Animación */
@@ -238,7 +235,7 @@
             box-shadow: 0 10px 30px rgba(71, 71, 71, 0.08);
             transition: transform 0.3s, box-shadow 0.3s;
             display: flex;
-            flex-direction: column; /* Permite empujar el botón al fondo */
+            flex-direction: column; 
         }
         .card:hover {
             transform: translateY(-10px);
@@ -263,7 +260,7 @@
             padding: 30px;
             display: flex;
             flex-direction: column;
-            flex-grow: 1; /* Ocupa el espacio restante de la tarjeta */
+            flex-grow: 1; 
         }
         .card h3 {
             color: var(--primario);
@@ -276,7 +273,7 @@
             margin-bottom: 15px;
         }
         .card-content ul {
-            list-style: none; /* Quitamos las viñetas por defecto para usar las palomitas */
+            list-style: none; 
             margin-bottom: 25px;
         }
         .card-content ul li {
@@ -287,9 +284,8 @@
             line-height: 1.4;
         }
         
-        /* Botón específico para las tarjetas */
         .btn-card {
-            margin-top: auto; /* Empuja el botón siempre hacia abajo */
+            margin-top: auto; 
             display: inline-block;
             background-color: var(--primario);
             color: var(--blanco);
@@ -360,6 +356,8 @@
         .footer-logo {
             max-height: 60px;
             margin-bottom: 20px;
+            /* Se aplica filtro permanente al logo para que sea blanco sobre el fondo oscuro */
+            filter: brightness(0) invert(1);
         }
         .footer-col p {
             margin-bottom: 10px;
@@ -405,7 +403,9 @@
     <!-- Menú de Navegación -->
     <header class="navbar" id="navbar">
         <div class="logo-container">
-            <img src="Logo.png" alt="Logotipo Empaques Corona" class="logo-img">
+            <a href="index.html" class="logo-wrapper">
+                <img src="Logo.png" alt="Logotipo Empaques Corona" class="logo-img">
+            </a>
         </div>
         <nav>
             <ul class="nav-links">
@@ -413,7 +413,8 @@
                 <li><a href="polyfoam.html">Polifoam</a></li>
                 <li><a href="poliburbuja.html">Poliburbuja</a></li>
                 <li class="dropdown">
-                    <a href="">Suministros ▾</a>
+                    <!-- Enlace muerto para evitar que el menú se cierre -->
+                    <a href="javascript:void(0);">Suministros ▾</a>
                     <ul class="dropdown-content">
                         <li><a href="#flejes">Flejes</a></li>
                         <li><a href="#playo">Playo</a></li>
@@ -531,7 +532,8 @@
         <div class="footer-grid">
             
             <div id="nosotros" class="footer-col">
-                <img src="https://via.placeholder.com/200x60/474747/ffffff?text=LOGO+AQU%C3%8D" alt="Logotipo Empaques Corona" class="footer-logo">
+                <!-- Se agregó tu imagen Logo.png y tomará el filtro blanco del CSS -->
+                <img src="Logo.png" alt="Logotipo Empaques Corona" class="footer-logo">
                 <p>No somos creadores de materia prima, somos tu socio estratégico en la transformación y corte de polifoam. Generamos soluciones de empaque eficientes, con entregas ágiles de 3 a 5 días.</p>
             </div>
 
