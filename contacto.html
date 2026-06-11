@@ -6,7 +6,6 @@
     <title>Contacto | Empaques Corona - Cotice su Proyecto</title>
     <meta name="description" content="Contacte a Empaques Corona. Asesoría especializada en soluciones de empaque industrial, polifoam y poliburbuja. Cotizaciones rápidas.">
     
-    <!-- Tipografía Geologica -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -77,18 +76,17 @@
             max-height: 60px; 
             width: auto;
             object-fit: contain;
-            transition: opacity 0.4s ease;
+            /* CAMBIO: Transición para el filtro (suaviza el cambio de color) */
+            transition: filter 0.4s ease;
+            filter: none; /* Estado inicial: color normal */
         }
 
-        .logo-blanco {
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0; 
+        /* --- CAMBIO: SOLUCIÓN DE UN SOLO LOGO USANDO FILTROS --- */
+        /* Al hacer scroll, forzamos el logo a ser blanco puro */
+        /* brightness(0) hace la imagen negra, invert(1) la invierte a blanco */
+        .navbar.scrolled .logo-img {
+            filter: brightness(0) invert(1);
         }
-
-        .navbar.scrolled .logo-original { opacity: 0; }
-        .navbar.scrolled .logo-blanco { opacity: 1; }
 
         .nav-links {
             list-style: none;
@@ -115,43 +113,6 @@
         .nav-links li a:hover { color: var(--primario); }
         .navbar.scrolled .nav-links li a { color: var(--blanco); }
         .navbar.scrolled .nav-links li a:hover { color: var(--gris-claro); }
-
-        /* Menú Desplegable (Navegación) */
-        .dropdown:hover .dropdown-content {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-        .dropdown-content {
-            display: block;
-            opacity: 0;
-            transform: translateY(10px);
-            pointer-events: none;
-            position: absolute;
-            top: 60px; 
-            left: 0;
-            background-color: var(--blanco);
-            min-width: 180px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            z-index: 1001;
-        }
-        .dropdown-content li { display: block; }
-        .dropdown-content li a {
-            color: var(--gris-oscuro) !important; 
-            padding: 12px 20px;
-            display: block;
-            border-bottom: 1px solid rgba(198,198,198,0.2);
-        }
-        .dropdown-content li:last-child a { border-bottom: none; }
-        .dropdown-content li a:hover {
-            background-color: var(--fondo);
-            color: var(--primario) !important;
-            padding-left: 25px; 
-        }
 
         /* Utilidades de Animación */
         .reveal {
@@ -445,6 +406,8 @@
         .footer-logo {
             max-height: 60px;
             margin-bottom: 20px;
+            /* CAMBIO: También aplicamos filtro al logo del footer porque el fondo es oscuro */
+            filter: brightness(0) invert(1);
         }
         .footer-col p {
             margin-bottom: 10px;
@@ -483,33 +446,23 @@
 </head>
 <body>
 
-    <!-- Menú de Navegación -->
     <header class="navbar" id="navbar">
         <div class="logo-container">
             <a href="index.html" class="logo-wrapper">
-                <img src="Logo.png" alt="Logotipo Empaques Corona" class="logo-img logo-original">
-                <img src="logo-negativo-blanco.png" alt="Logotipo Empaques Corona Blanco" class="logo-img logo-blanco">
+                <img src="Logo.png" alt="Logotipo Empaques Corona" class="logo-img">
             </a>
         </div>
         <nav>
             <ul class="nav-links">
-                <li><a href="index.html#home">Home</a></li>
-                <li><a href="polyfoam.html">Polifoam</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="polifoam.html">Polifoam</a></li>
                 <li><a href="poliburbuja.html">Poliburbuja</a></li>
-                <li class="dropdown">
-                    <a href="index.html#suministros">Suministros ▾</a>
-                    <ul class="dropdown-content">
-                        <li><a href="index.html#flejes">Flejes</a></li>
-                        <li><a href="index.html#playo">Playo</a></li>
-                        <li><a href="index.html#cacahuate">Cacahuate Bio</a></li>
-                    </ul>
-                </li>
+                <li><a href="suministros.html">Suministros</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Hero Section Especializado en Contacto -->
     <section class="hero reveal">
         <div class="hero-content">
             <h1>Hablemos de su Proyecto</h1>
@@ -517,11 +470,9 @@
         </div>
     </section>
 
-    <!-- Sección del Formulario Dual -->
     <section class="contacto-section reveal">
         <div class="contacto-container">
             
-            <!-- Columna Izquierda: Información -->
             <div class="contacto-info">
                 <div>
                     <h3>Atención Corporativa</h3>
@@ -557,14 +508,11 @@
                 </div>
             </div>
 
-            <!-- Columna Derecha: Formulario de Cotización -->
             <div class="contacto-form">
                 <h3>Solicitar Cotización</h3>
                 
-                <!-- Conexión a FormSubmit -->
-                <form action="https://formsubmit.co/TU_CORREO_AQUI@dominio.com" method="POST">
+                <form action="https://formsubmit.co/luislopeojeda@gmail.com" method="POST">
                     
-                    <!-- Configuraciones ocultas de FormSubmit -->
                     <input type="hidden" name="_subject" value="Nueva Cotización desde Web - Empaques Corona">
                     <input type="hidden" name="_template" value="table">
                     
@@ -589,7 +537,6 @@
                         </div>
                     </div>
 
-                    <!-- Panel Desplegable de Suministros (UX Avanzado) -->
                     <div class="form-group">
                         <label>¿Qué suministros necesita cotizar?</label>
                         <div class="custom-dropdown">
@@ -643,7 +590,6 @@
                         </div>
                     </div>
 
-                    <!-- Checkbox de Promociones -->
                     <div class="checkbox-descuento">
                         <input type="checkbox" id="promociones" name="Recibir_Descuentos" value="Sí acepto">
                         <label for="promociones" style="margin-bottom:0; font-weight:400; font-size:0.9rem; cursor:pointer;">
@@ -658,12 +604,11 @@
         </div>
     </section>
 
-    <!-- Footer a 3 Columnas -->
     <footer class="main-footer">
         <div class="footer-grid">
             
             <div class="footer-col">
-                <img src="logo-negativo-blanco.png" alt="Logotipo Empaques Corona" class="footer-logo">
+                <img src="Logo.png" alt="Logotipo Empaques Corona" class="footer-logo">
                 <p>No somos creadores de materia prima, somos tu socio estratégico en la transformación y corte de polifoam. Generamos soluciones de empaque eficientes, con entregas ágiles de 3 a 5 días.</p>
             </div>
 
@@ -681,7 +626,7 @@
                     <li><a href="index.html#home">Home</a></li>
                     <li><a href="polifoam.html">Polifoam</a></li>
                     <li><a href="poliburbuja.html">Poliburbuja</a></li>
-                    <li><a href="index.html#suministros">Suministros</a></li>
+                    <li><a href="suministros.html">Suministros</a></li>
                     <li><a href="contacto.html">Contacto</a></li>
                 </ul>
             </div>
@@ -693,7 +638,6 @@
         </div>
     </footer>
 
-    <!-- JavaScript -->
     <script>
         // Transición de Color del Navbar
         const navbar = document.getElementById('navbar');

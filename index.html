@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
-        /* Variables Institucionales */
+        /* --- Variables Institucionales --- */
         :root {
             --gris-oscuro: #474747;
             --gris-claro: #c6c6c6;
@@ -41,85 +42,47 @@
         /* --- Menú de Navegación --- */
         .navbar {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--nav-height);
+            top: 0; left: 0; width: 100%; height: var(--nav-height);
             background-color: var(--blanco);
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 50px;
-            z-index: 1000;
-            transition: all 0.4s ease; 
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 50px; z-index: 1000; transition: all 0.4s ease; 
         }
-        
         .navbar.scrolled {
             background-color: var(--primario);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            height: 100%;
-        }
-        .logo-wrapper { 
-            position: relative; 
-            display: flex; 
-            align-items: center; 
-            height: 60px; 
-        }
-        .logo-img {
-            max-height: 60px; 
-            width: auto;
-            object-fit: contain;
-            transition: filter 0.4s ease;
-        }
+        .logo-container { display: flex; align-items: center; height: 100%; }
+        .logo-wrapper { position: relative; display: flex; align-items: center; height: 60px; z-index: 1002; }
+        .logo-img { max-height: 60px; width: auto; object-fit: contain; transition: filter 0.4s ease; }
+        .navbar.scrolled .logo-img { filter: brightness(0) invert(1); }
 
-        /* Cambio de color a blanco al hacer scroll */
-        .navbar.scrolled .logo-img {
-            filter: brightness(0) invert(1); 
+        /* Icono Menú Hamburguesa (Oculto en Desktop) */
+        .menu-toggle {
+            display: none; flex-direction: column; cursor: pointer; gap: 6px; z-index: 1002;
         }
+        .menu-toggle span {
+            width: 30px; height: 3px; background-color: var(--gris-oscuro);
+            border-radius: 3px; transition: all 0.3s ease;
+        }
+        .navbar.scrolled .menu-toggle span { background-color: var(--blanco); }
 
+        /* Enlaces del Nav */
         .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 30px;
-            align-items: center;
-            height: 100%;
+            list-style: none; display: flex; gap: 30px; align-items: center; height: 100%;
         }
-        .nav-links li {
-            position: relative;
-            height: 100%;
-            display: flex;
-            align-items: center;
-        }
+        .nav-links li { position: relative; height: 100%; display: flex; align-items: center; }
         .nav-links li a {
-            text-decoration: none;
-            color: var(--gris-oscuro);
-            font-weight: 600;
-            font-size: 1rem;
-            transition: color 0.3s ease;
-            padding: 10px 0;
+            text-decoration: none; color: var(--gris-oscuro); font-weight: 600;
+            font-size: 1rem; transition: color 0.3s ease; padding: 10px 0;
         }
-        
-        .nav-links li a:hover {
-            color: var(--primario);
-        }
+        .nav-links li a:hover { color: var(--primario); }
+        .navbar.scrolled .nav-links li a { color: var(--blanco); }
+        .navbar.scrolled .nav-links li a:hover { color: var(--gris-claro); }
 
-        .navbar.scrolled .nav-links li a {
-            color: var(--blanco);
-        }
-        .navbar.scrolled .nav-links li a:hover {
-            color: var(--gris-claro);
-        }
-
-        /* --- Menú Desplegable (100% a prueba de fallos) --- */
-        .dropdown {
-            position: relative;
-        }
+        /* Dropdown Desktop */
+        .dropdown { position: relative; cursor: pointer; }
         .dropdown::after {
             content: ''; position: absolute; bottom: -20px; left: 0;
             width: 100%; height: 30px; background: transparent; z-index: 1000;
@@ -130,271 +93,138 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.15); border-radius: 8px;
             overflow: hidden; z-index: 1001;
         }
-        .dropdown:hover .dropdown-content {
-            display: block; animation: deslizarMenu 0.3s ease forwards;
+        @media (min-width: 769px) {
+            .dropdown:hover .dropdown-content {
+                display: block; animation: deslizarMenu 0.3s ease forwards;
+            }
         }
-        .dropdown-content li { display: block; }
+        .dropdown-content li { display: block; height: auto; }
         .dropdown-content li a { 
             color: var(--gris-oscuro) !important; padding: 15px 20px; display: block; 
             border-bottom: 1px solid rgba(198,198,198,0.2); transition: all 0.2s ease;
         }
         .dropdown-content li:last-child a { border-bottom: none; }
-        .dropdown-content li a:hover { 
-            background-color: var(--fondo); color: var(--primario) !important; padding-left: 25px; 
-        }
+        .dropdown-content li a:hover { background-color: var(--fondo); color: var(--primario) !important; padding-left: 25px; }
 
         @keyframes deslizarMenu {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Utilidades de Animación */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        /* --- Utilidades --- */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Hero Section */
+        /* --- Hero Section --- */
         .hero {
             background: linear-gradient(135deg, var(--primario) 0%, #1a242f 100%);
-            color: var(--blanco);
-            padding: 100px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            color: var(--blanco); padding: 100px 20px; text-align: center;
+            position: relative; overflow: hidden;
         }
         .hero::after {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
             background: radial-gradient(circle, rgba(198,198,198,0.1) 10%, transparent 10%);
-            background-size: 20px 20px;
-            z-index: 0;
+            background-size: 20px 20px; z-index: 0;
         }
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .hero h1 {
-            font-size: 3.2rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            font-weight: 300;
-            color: var(--gris-claro);
-            margin-bottom: 40px;
-        }
-        .btn-cta {
-            display: inline-block;
-            background-color: var(--blanco);
-            color: var(--primario);
-            padding: 15px 35px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        .btn-cta:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 25px rgba(0,0,0,0.3);
-        }
-
-        /* Industrias (Tarjetas con Imágenes y Botones) */
-        .industrias {
-            padding: 80px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--primario);
-            margin-bottom: 50px;
-            font-weight: 800;
-        }
-        .grid-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-        }
-        .card {
-            background: var(--blanco);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(71, 71, 71, 0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            flex-direction: column; 
-        }
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(71, 71, 71, 0.15);
-        }
-        .card-img-container {
-            width: 100%;
-            height: 200px;
-            background-color: var(--gris-claro);
-            overflow: hidden;
-        }
-        .card-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        .card:hover .card-img {
-            transform: scale(1.05); 
-        }
-        .card-content {
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1; 
-        }
-        .card h3 {
-            color: var(--primario);
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-        .card-content p {
-            font-weight: 300;
-            color: var(--gris-oscuro);
-            margin-bottom: 15px;
-        }
-        .card-content ul {
-            list-style: none; 
-            margin-bottom: 25px;
-        }
-        .card-content ul li {
-            font-weight: 400;
-            color: var(--gris-oscuro);
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-            line-height: 1.4;
-        }
+        .hero-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+        .hero h1 { font-size: 3.2rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2; }
+        .hero p { font-size: 1.2rem; font-weight: 300; color: var(--gris-claro); margin-bottom: 40px; }
         
+        .btn-cta {
+            display: inline-block; background-color: var(--blanco); color: var(--primario);
+            padding: 15px 35px; border-radius: 50px; font-weight: 600; text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .btn-cta:hover { transform: translateY(-5px); box-shadow: 0 15px 25px rgba(0,0,0,0.3); }
+
+        /* --- Industrias --- */
+        .industrias { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2.5rem; color: var(--primario); margin-bottom: 50px; font-weight: 800; }
+        .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .card {
+            background: var(--blanco); border-radius: 15px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(71, 71, 71, 0.08); transition: transform 0.3s, box-shadow 0.3s;
+            display: flex; flex-direction: column;
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(71, 71, 71, 0.15); }
+        .card-img-container { width: 100%; height: 200px; background-color: var(--gris-claro); overflow: hidden; }
+        .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .card:hover .card-img { transform: scale(1.05); }
+        .card-content { padding: 30px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card h3 { color: var(--primario); font-size: 1.5rem; margin-bottom: 10px; }
+        .card-content p { font-weight: 300; color: var(--gris-oscuro); margin-bottom: 15px; }
+        .card-content ul { list-style: none; margin-bottom: 25px; }
+        .card-content ul li { font-weight: 400; color: var(--gris-oscuro); margin-bottom: 8px; font-size: 0.95rem; line-height: 1.4; }
         .btn-card {
-            margin-top: auto; 
-            display: inline-block;
-            background-color: var(--primario);
-            color: var(--blanco);
-            padding: 12px 20px;
-            border-radius: 50px;
-            text-align: center;
-            font-weight: 600;
-            text-decoration: none;
+            margin-top: auto; display: inline-block; background-color: var(--primario); color: var(--blanco);
+            padding: 12px 20px; border-radius: 50px; text-align: center; font-weight: 600; text-decoration: none;
             transition: background-color 0.3s, transform 0.3s;
         }
-        .btn-card:hover {
-            background-color: var(--gris-oscuro);
-            transform: translateY(-2px);
-        }
+        .btn-card:hover { background-color: var(--gris-oscuro); transform: translateY(-2px); }
 
-        /* Tabla Técnica */
-        .specs {
-            background-color: var(--blanco);
-            padding: 80px 20px;
-        }
-        .table-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            overflow-x: auto;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        th, td {
-            padding: 20px;
-            text-align: left;
-            border-bottom: 1px solid var(--gris-claro);
-        }
-        th {
-            background-color: var(--primario);
-            color: var(--blanco);
-            font-weight: 600;
-        }
-        tr:hover {
-            background-color: var(--fondo);
-        }
+        /* --- Tabla Técnica --- */
+        .specs { background-color: var(--blanco); padding: 80px 20px; }
+        .table-container { max-width: 1000px; margin: 0 auto; overflow-x: auto; /* Permite scroll horizontal en móvil */ }
+        table { width: 100%; min-width: 600px; border-collapse: collapse; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        th, td { padding: 20px; text-align: left; border-bottom: 1px solid var(--gris-claro); }
+        th { background-color: var(--primario); color: var(--blanco); font-weight: 600; }
+        tr:hover { background-color: var(--fondo); }
 
-        /* Footer a 3 Columnas */
-        .main-footer {
-            background-color: var(--gris-oscuro);
-            color: var(--blanco);
-            padding: 60px 50px;
-            margin-top: 50px;
-        }
-        .footer-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-        }
-        .footer-col h3 {
-            font-size: 1.2rem;
-            color: var(--gris-claro);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .footer-logo {
-            max-height: 60px;
-            margin-bottom: 20px;
-            /* Se aplica filtro permanente al logo para que sea blanco sobre el fondo oscuro */
-            filter: brightness(0) invert(1);
-        }
-        .footer-col p {
-            margin-bottom: 10px;
-            font-weight: 300;
-            color: #e0e0e0;
-        }
-        .footer-links {
-            list-style: none;
-        }
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-        .footer-links a {
-            color: #e0e0e0;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 300;
-        }
-        .footer-links a:hover {
-            color: var(--blanco);
-            padding-left: 5px; 
-        }
-        .footer-bottom {
-            text-align: center;
-            padding-top: 40px;
-            margin-top: 40px;
-            border-top: 1px solid rgba(198, 198, 198, 0.2);
-            font-size: 0.9rem;
-            color: var(--gris-claro);
-        }
+        /* --- Footer --- */
+        .main-footer { background-color: var(--gris-oscuro); color: var(--blanco); padding: 60px 50px; margin-top: 50px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
+        .footer-col h3 { font-size: 1.2rem; color: var(--gris-claro); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-logo { max-height: 60px; margin-bottom: 20px; filter: brightness(0) invert(1); }
+        .footer-col p { margin-bottom: 10px; font-weight: 300; color: #e0e0e0; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: #e0e0e0; text-decoration: none; transition: color 0.3s; font-weight: 300; }
+        .footer-links a:hover { color: var(--blanco); padding-left: 5px; }
+        .footer-bottom { text-align: center; padding-top: 40px; margin-top: 40px; border-top: 1px solid rgba(198, 198, 198, 0.2); font-size: 0.9rem; color: var(--gris-claro); }
 
-        /* Responsive */
+        /* ========================================= */
+        /* MEDIA QUERIES (ADAPTACIÓN PARA CELULARES) */
+        /* ========================================= */
         @media (max-width: 768px) {
+            /* Navbar y Menú Móvil */
             .navbar { padding: 0 20px; }
-            .nav-links { display: none; }
+            .menu-toggle { display: flex; }
+            
+            .nav-links {
+                position: absolute; top: var(--nav-height); left: -100%; /* Oculto fuera de la pantalla */
+                width: 100%; height: 100vh; background-color: var(--blanco);
+                flex-direction: column; align-items: center; justify-content: flex-start;
+                padding-top: 40px; gap: 20px; transition: left 0.4s ease;
+            }
+            .nav-links.active { left: 0; /* Aparece el menú deslizando */ }
+            
+            /* Ajuste de colores del nav en móvil */
+            .nav-links li { height: auto; width: 100%; text-align: center; }
+            .nav-links li a { font-size: 1.2rem; display: block; padding: 15px; color: var(--gris-oscuro) !important; }
+            
+            /* Ajuste Dropdown en Móvil */
+            .dropdown-content {
+                position: static; box-shadow: none; border-radius: 0;
+                background-color: var(--fondo); width: 100%; padding: 0; display: none;
+            }
+            .dropdown.mobile-open .dropdown-content { display: block; }
+            
+            /* Animación del Icono Hamburguesa al abrir */
+            .menu-toggle.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+            .menu-toggle.open span:nth-child(2) { opacity: 0; }
+            .menu-toggle.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+            /* Textos y Espacios */
+            .hero { padding: 60px 20px; }
             .hero h1 { font-size: 2.2rem; }
-            .footer-grid { text-align: center; }
+            .section-title { font-size: 2rem; margin-bottom: 30px; }
+            
+            .industrias { padding: 60px 20px; }
+            .specs { padding: 50px 20px; }
+            
+            .main-footer { padding: 40px 20px; }
+            .footer-grid { text-align: center; gap: 30px; }
+            .footer-col { display: flex; flex-direction: column; align-items: center; }
         }
     </style>
 </head>
@@ -407,19 +237,21 @@
                 <img src="Logo.png" alt="Logotipo Empaques Corona" class="logo-img">
             </a>
         </div>
+        
+        <!-- Botón Menú Hamburguesa -->
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
         <nav>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="polyfoam.html">Polifoam</a></li>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="polifoam.html">Polifoam</a></li>
                 <li><a href="poliburbuja.html">Poliburbuja</a></li>
-                <li class="dropdown">
-                    <!-- Enlace muerto para evitar que el menú se cierre -->
-                    <a href="javascript:void(0);">Suministros ▾</a>
-                    <ul class="dropdown-content">
-                        <li><a href="#flejes">Flejes</a></li>
-                        <li><a href="#playo">Playo</a></li>
-                        <li><a href="#cacahuate">Cacahuate Bio</a></li>
-                    </ul>
+                <li class="dropdown" id="suministros-dropdown">
+                    <a href="suministros.html">Suministros</a>
                 </li>
                 <li><a href="contacto.html">Contacto</a></li>
             </ul>
@@ -435,15 +267,14 @@
         </div>
     </section>
 
-    <!-- Catálogo de Productos (Tarjetas Actualizadas) -->
+    <!-- Catálogo de Productos -->
     <section id="catalogo" class="industrias">
         <h2 class="section-title reveal">Catálogo de Soluciones</h2>
         <div class="grid-cards">
             
-            <!-- Card 1: Polifoam -->
             <div class="card reveal">
                 <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1518982540400-16c8bc59e71e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Polifoam y protección de autopartes" class="card-img">
+                    <img src="https://i.postimg.cc/BbHKRJSY/Gemini-Generated-Image-ctn8j4ctn8j4ctn8.png" alt="Polifoam y protección de autopartes" class="card-img">
                 </div>
                 <div class="card-content">
                     <h3>Polifoam (Espuma)</h3>
@@ -453,14 +284,13 @@
                         <li>✔ Calibres técnicos: 1/32", 1/16", 1/8", 1/4"</li>
                         <li>✔ Separadores para jitomate y fruta</li>
                     </ul>
-                    <a href="#suministros" class="btn-card">Ver suministros</a>
+                    <a href="polyfoam.html" class="btn-card">Ver especificaciones</a>
                 </div>
             </div>
 
-            <!-- Card 2: Poliburbuja -->
             <div class="card reveal">
                 <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1628186981442-5e6082c57f5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Poliburbuja y empaque seguro" class="card-img">
+                    <img src="https://i.postimg.cc/P5w54Sqw/Gemini-Generated-Image-y8fl2xy8fl2xy8fl.png" alt="Poliburbuja y empaque seguro" class="card-img">
                 </div>
                 <div class="card-content">
                     <h3>Poliburbuja</h3>
@@ -470,12 +300,11 @@
                         <li>✔ Rollos formato natural y antiestático</li>
                         <li>✔ Diámetros de burbuja estándar y alta</li>
                     </ul>
-                    <a href="#suministros" class="btn-card">Ver suministros</a>
+                    <a href="poliburbuja.html" class="btn-card">Ver formatos</a>
                 </div>
             </div>
 
-            <!-- Card 3: Suministros Industriales -->
-            <div class="card reveal">
+            <div class="card reveal" id="flejes">
                 <div class="card-img-container">
                     <img src="https://images.unsplash.com/photo-1586528116311-ad8ed7c1590a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Suministros Industriales y Paletizado" class="card-img">
                 </div>
@@ -487,14 +316,14 @@
                         <li>✔ Playo (Película estirable manual y máquina)</li>
                         <li>✔ Cartón corrugado y Cacahuate Bio</li>
                     </ul>
-                    <a href="#suministros" class="btn-card">Ver suministros</a>
+                    <a href="contacto.html" class="btn-card">Cotizar suministros</a>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <!-- Tabla Técnica (Suministros) -->
+    <!-- Tabla Técnica -->
     <section id="suministros" class="specs reveal">
         <h2 class="section-title">Capacidad de Suministro y Formatos</h2>
         <div class="table-container">
@@ -530,42 +359,36 @@
     <!-- Footer a 3 Columnas -->
     <footer id="contacto" class="main-footer">
         <div class="footer-grid">
-            
             <div id="nosotros" class="footer-col">
-                <!-- Se agregó tu imagen Logo.png y tomará el filtro blanco del CSS -->
                 <img src="Logo.png" alt="Logotipo Empaques Corona" class="footer-logo">
-                <p>No somos creadores de materia prima, somos tu socio estratégico en la transformación y corte de polifoam. Generamos soluciones de empaque eficientes, con entregas ágiles de 3 a 5 días.</p>
+                <p>Somos tu socio estratégico en la transformación y corte de polifoam. Generamos soluciones de empaque eficientes, con entregas ágiles de 3 a 5 días.</p>
             </div>
-
             <div class="footer-col">
                 <h3>Contacto</h3>
-                <p><strong>Ubicación:</strong> Parque Industrial, México</p>
+                <p><strong>Ubicación:</strong> Estado de Mexico</p>
                 <p><strong>Teléfono:</strong> +52 (55) 1234 5678</p>
                 <p><strong>Email:</strong> ventas@empaquescorona.com</p>
                 <p><strong>Horario:</strong> Lunes a Viernes 8:00 a 18:00 hrs</p>
             </div>
-
             <div class="footer-col">
                 <h3>Navegación</h3>
                 <ul class="footer-links">
-                    <li><a href="#home">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="polyfoam.html">Polifoam</a></li>
                     <li><a href="poliburbuja.html">Poliburbuja</a></li>
                     <li><a href="#suministros">Suministros</a></li>
                     <li><a href="contacto.html">Contacto</a></li>
                 </ul>
             </div>
-
         </div>
-        
         <div class="footer-bottom">
             <p>&copy; 2026 Empaques Corona. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <!-- JavaScript para animaciones e interacciones -->
+    <!-- JavaScript para interacciones móviles y animaciones -->
     <script>
-        // Funcionalidad de Cambio de Color del Navbar al hacer Scroll
+        // 1. Efecto Scroll Navbar
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -575,7 +398,7 @@
             }
         });
 
-        // Funcionalidad de Scroll Reveal
+        // 2. Efecto Scroll Reveal (Aparición de elementos)
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -589,6 +412,25 @@
         }
         window.addEventListener("scroll", reveal);
         reveal();
+
+        // 3. Lógica del Menú Hamburguesa (Mobile)
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        const dropdownLi = document.getElementById('suministros-dropdown');
+
+        // Abrir/Cerrar menú principal
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+        });
+
+        // Abrir/Cerrar Submenú (Suministros) en móvil
+        dropdownLi.addEventListener('click', function(e) {
+            // Solo actuar como toggle si estamos en celular
+            if(window.innerWidth <= 768) {
+                this.classList.toggle('mobile-open');
+            }
+        });
     </script>
 </body>
 </html>
